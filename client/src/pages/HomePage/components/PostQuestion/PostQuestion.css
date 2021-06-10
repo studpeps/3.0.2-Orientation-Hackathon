@@ -1,0 +1,93 @@
+.parameterSearch {
+  position: fixed;
+  right: -500px;
+  transition: all 0.8s;
+  top: 65px;
+  height: 100vh;
+  padding: 15px 20px;
+  box-shadow: 0px 10px 10px 5px rgba(131, 186, 237, 0.15);
+  border: 1px solid #e2e2e2;
+  border-right: none;
+  border-radius: 0 0 0 5px;
+  z-index: 60;
+  background-color: white;
+}
+.searchTitle {
+  padding: 12px 25px;
+  margin: 0;
+  color: #83baed;
+  justify-content: space-between;
+}
+.refreshIcon {
+  margin-left: 10px;
+  border: none;
+}
+.refreshIcon:hover {
+  cursor: pointer;
+  color: #83baed;
+}
+
+.hiddenParameters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  background-color: white;
+  right: 0;
+  padding: 5px 20px;
+  padding-right: 10px;
+  margin-top: 15px;
+  border-right: none;
+  border-top: none;
+  border-radius: 0 0 0 5px;
+  width: 19rem;
+}
+.searchBtn {
+  text-align: center;
+  justify-content: center;
+  margin-left: 35%;
+}
+.searchBtnbutton {
+  padding: 10px 25px;
+  border-radius: 5px;
+  border: none;
+  background-color: #83baed;
+  color: white;
+}
+.param {
+  position: relative;
+  margin-bottom: 5px;
+  margin-right: 20px;
+  min-width: 10rem;
+  float: left;
+}
+/* p {
+  margin: 5px 5px;
+} */
+
+.parameterSearch.open {
+  right: 0;
+}
+
+.openPost {
+  margin-top: 20px;
+  padding: 15px 20px;
+  width: 20%;
+  background-color: #85c1f8;
+  color: white;
+  border: none;
+  font-size: 18px;
+}
+.paramInput {
+  border-radius: 3px;
+  border: none;
+  background-color: #e2e2e2;
+  padding: 15px 20px;
+  width: 100%;
+}
+.paramtextarea {
+  border-radius: 3px;
+  border: none;
+  background-color: #e2e2e2;
+  padding: 15px 20px;
+  width: 120%;
+}

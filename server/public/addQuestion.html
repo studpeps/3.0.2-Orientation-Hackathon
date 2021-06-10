@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Question</title>
+</head>
+
+<body>
+    <h1>Add Question</h1>
+
+    <form id="add-qns">
+
+        <input
+          name="title"
+          type="text"
+          id="title"
+          placeholder="Title*"
+          required
+        />
+        <br>
+        <br>
+
+        <input
+          name="description"
+          type="text"
+          id="description"
+          placeholder="Description*"
+          required
+        />
+        <br><br>
+        <button type="submit">Add Question</button>
+      </form>
+
+
+      <script>
+
+        Logged()
+        async function Logged(event) {
+            const result = await fetch('/api/checkauth', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            }).then((res) => res.json())
+
+            if (result.status === 'ok') {
+               
+            } 
+            else {
+                Redirect()
+            }
+        }
+
+
+        const form = document.getElementById('add-qns')
+        form.addEventListener('submit', addQns)
+
+        async function addQns(event) {
+            event.preventDefault()
+            const title = document.getElementById('title').value
+            const description = document.getElementById('description').value
+
+            const result = await fetch('/api/question', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    title,
+                    description
+                })
+            }).then((res) => res.json())
+
+            if (result.status === 'ok') {
+                alert('Success')
+                RedirectToSuccess()
+            } else {
+                alert(result.message)
+                console.log(result.message)
+            }
+        }
+        function Redirect() {
+            window.location = "./login.html";
+        }
+        function RedirectToSuccess() {
+            window.location = "./page.html";
+        }
+    </script>
+    
+</body>
+
+</html>

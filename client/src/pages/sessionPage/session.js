@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "./css/Editor.css";
+import "../../css/Editor.css";
 import firebase from "firebase";
 import Result from "./result";
 
@@ -21,8 +21,8 @@ const Editor = () => {
     };
 
     try {
-      const resp = await axios.post("https://api.jdoodle.com/v1/execute", code);
-      // console.log(resp.data.output);
+      const resp = await axios.post("https://awancors.herokuapp.com/api.jdoodle.com/v1/execute", code);
+      console.log(resp.data.output);
       setData(resp.data.output);
     } catch (err) {
       // Handle Error Here`

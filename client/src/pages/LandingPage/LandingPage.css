@@ -1,0 +1,29 @@
+.mainLand {
+  height: 75vh;
+  background-color: #f1f0f0;
+  padding: 35px;
+}
+.btnDiv {
+  position: absolute;
+  bottom: 20%;
+}
+.textDiv {
+  display: flex;
+}
+.descText {
+  width: 60%;
+}
+.btnDiv button {
+  border-radius: 5px;
+  padding: 10px 20px;
+  margin-right: 30px;
+}
+.inBtn {
+  background-color: black;
+  color: white;
+}
+.upBtn {
+  background-color: white;
+  border: 1px solid black;
+  color: black;
+}

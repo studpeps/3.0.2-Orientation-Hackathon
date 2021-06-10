@@ -12,19 +12,3 @@ exports.catchErrors = (fn) => {
         });
     };
 };
-
-exports.developmentErrors = (err, req, res, next) => {
-    err.stack = err.stack || "";
-    const errorDetails = {
-        message: err.message,
-        status: err.status,
-        stack: err.stack,
-    };
-    res.status(err.status || 500).json(errorDetails);
-};
-
-exports.productionErrors = (err, req, res, next) => {
-    res.status(err.status || 500).json({
-        error: "Internal Server Errsor",
-    });
-};
