@@ -15,6 +15,27 @@
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+
+    <!-- the following is required for firepad -->
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/7.6.2/firebase.js"></script>
+
+    <!-- CodeMirror and its JavaScript mode file -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.17.0/codemirror.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.17.0/mode/javascript/javascript.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.17.0/codemirror.css"
+    />
+
+    <!-- Firepad -->
+    <link
+      rel="stylesheet"
+      href="https://firepad.io/releases/v1.5.9/firepad.css"
+    />
+    <script src="https://firepad.io/releases/v1.5.9/firepad.min.js"></script>
+
+    <script src="https://firepad.io/releases/v1.5.10/firepad.min.js"></script>
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
