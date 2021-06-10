@@ -16,7 +16,7 @@ function LandingPage() {
                         <p>- Learn and help people from around the globe</p>
                         <p>- Connect through a collaborative compiler and video chat</p>
                     </div>
-                    <img width="700px" height="500px" src={headImg}></img>
+                    <img width="700px" height="500px" src={headImg} alt=""></img>
                 </div>
                 <div className="btnDiv">
                 <Link to="/login"><button className="inBtn">Sign In</button></Link>
