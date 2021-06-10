@@ -1,0 +1,83 @@
+#firepad-container {
+  width: 100%;
+  height: 50vh;
+  margin-top: 5vh;
+  margin-left: 2vw;
+  border: 1px solid #000;
+}
+
+.body {
+  width: 100%;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.top-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.video-chat {
+  display: flex;
+  flex-direction: column;
+  margin-top: 5vh;
+  margin-left: 2vw;
+  width: 30%;
+}
+
+.vid {
+  height: 100%;
+  width: 300px;
+  background-color: rgb(0, 0, 0);
+  margin: 3px;
+}
+
+.middle-section {
+  height: 5vh;
+
+  margin: 1vh 2vw;
+  margin-right: 100px;
+  /* background-color: rgb(44, 37, 153); */
+  display: flex;
+  align-items: center;
+}
+
+.compile-btn {
+  border: none;
+  height: 40px;
+  width: 85px;
+  background-color: rgb(50, 151, 209);
+  margin-left: 20px;
+  margin-right: 20px;
+  color: #fff;
+}
+
+.end-call-btn {
+  border: none;
+  height: 40px;
+  width: 100px;
+  background-color: rgb(206, 72, 72);
+  margin-left: 20px;
+  margin-right: 20px;
+  color: #fff;
+}
+
+.bottom-section {
+  margin: 10px;
+  height: 300px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.result {
+  height: 100%;
+  width: 100%;
+  margin: 20px;
+  /* background-color: blueviolet; */
+  border: 1px solid #000;
+}
