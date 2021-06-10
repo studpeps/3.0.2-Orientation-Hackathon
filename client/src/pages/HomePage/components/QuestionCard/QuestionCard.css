@@ -1,0 +1,21 @@
+.qcard {
+  background-color: rgb(196, 196, 196, 0.17);
+  margin: 20px;
+  padding: 15px 20px;
+  border-radius: 5px;
+}
+.quser {
+  margin: 0;
+}
+.question {
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+}
+.join {
+  background-color: #16e49a;
+  border: none;
+  border-radius: 5px;
+  padding: 15px 20px;
+  height: fit-content;
+}

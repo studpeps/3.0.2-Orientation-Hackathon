@@ -1,0 +1,28 @@
+.register {
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  padding-top: 10%;
+  height: 78vh;
+  background-image: url("../../assests/coding.jpg");
+  background-repeat: no-repeat;
+  background-size: 100vw 100vh;
+}
+.registerForm {
+  border: 1px solid black;
+  border-radius: 5px;
+  width: fit-content;
+  padding: 20px 30px;
+  margin-left: 42%;
+  background-color: white;
+}
+.registerForm input {
+  padding: 10px 15px;
+  border-radius: 5px;
+}
+.submitBtn {
+  padding: 10px 25px;
+  background-color: black;
+  color: white;
+  border-radius: 5px;
+}

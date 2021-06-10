@@ -1,0 +1,11 @@
+.titleHome {
+  margin-top: 20px;
+  padding: 15px 20px;
+  width: 20%;
+  background-color: black;
+  color: white;
+}
+.topBar {
+  display: flex;
+  justify-content: space-between;
+}
