@@ -92,7 +92,7 @@ npm install
 
 ### 3. Build Back-end
 
-This will build the React.JS frontend.
+This will build the Node.JS backend.
 
 ```bash
 npm run build
