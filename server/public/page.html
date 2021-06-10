@@ -19,8 +19,13 @@
         <a href="/api/logout">Logout</a>
     </p>
 
+    <div id="all-questions">
+
+    </div>
+
     <script>
         Logged()
+        GetQuestions()
         async function Logged(event) {
 
             const result = await fetch('/api/checkauth', {
@@ -40,6 +45,48 @@
         }
         function Redirect() {
             window.location = "./login.html";
+        }
+
+
+        async function GetQuestions() {
+            const result = await fetch('/api/question', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            }).then((res) => res.json())
+
+            if (result.status === 'ok') {
+                let mainQuestiondiv = document.getElementById('all-questions')
+
+                for (i = 0; i < result.data.length; i++) {
+                    alert(result.data)
+                    let QuestionDiv = document.createElement("div");
+                    let theQuestion = document.createElement('p');
+                    let QuestionWriter = document.createElement('p');
+                    let QuestionDescription = document.createElement('p');
+                    let QuestionRoom = document.createElement('a');
+
+                    QuestionDiv.setAttribute("style", "border: 1px solid #000;");
+
+                    theQuestion.innerHTML = result.data[i].title;
+                    QuestionDescription.innerHTML = "At " + result.data[i].description;
+                    QuestionWriter.innerHTML = "Asked By " + result.data[i].user.username;
+                    QuestionRoom.href = "https://google.com"
+                    QuestionRoom.innerHTML = "Help for this"
+
+
+                    QuestionDiv.appendChild(theQuestion);
+                    QuestionDiv.appendChild(QuestionDescription);
+                    QuestionDiv.appendChild(QuestionWriter);
+                    QuestionDiv.appendChild(QuestionRoom);
+
+                    mainQuestiondiv.appendChild(QuestionDiv);
+                }
+            }
+            else {
+                document.getElementById('all-questions').innerHTML = "No Questions for now"
+            }
         }
     </script>
 </body>
