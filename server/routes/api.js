@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const userController = require('../controllers/userController')
+const questionController = require('../controllers/questionController')
 const auth = require('../middlewares/auth')
 
 const { catchErrors } = require('../handlers/errorHandler')
@@ -15,5 +16,9 @@ router.get('/checkauth', auth,  (req, res) => {
     })
 })
 router.get('/logout', catchErrors(userController.logout))
+
+// Question
+router.get("/question", auth, catchErrors(questionController.getQuestions));
+router.post("/question", auth, catchErrors(questionController.addQuestion));
 
 module.exports = router;
