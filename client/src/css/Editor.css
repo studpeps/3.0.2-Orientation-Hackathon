@@ -1,5 +1,5 @@
 #firepad-container {
-  width: 100%;
+  width: 50vw;
   height: 50vh;
   margin-top: 5vh;
   margin-left: 2vw;
@@ -12,27 +12,42 @@
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
+  background-image: linear-gradient(to bottom right, rgb(151, 36, 167), rgb(66, 58, 175));
 }
 
+.firepad {
+  width: 50vw;
+  height: 50vh;
+}
+
+.CodeMirror {
+  background-color: #1D2333;
+  color: #fff;
+  
+}
 .top-section {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: left;
 }
 
 .video-chat {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   margin-top: 5vh;
   margin-left: 2vw;
-  width: 30%;
+  width: 100%;
 }
 
 .vid {
-  height: 100%;
-  width: 300px;
+  height: 300px;
+  width: 400px;
   background-color: rgb(0, 0, 0);
   margin: 3px;
+}
+
+.vid video {
+  width: 400px;
 }
 
 .middle-section {
