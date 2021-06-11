@@ -75,7 +75,7 @@ function PostQuestion() {
                         <div className="param">
                             <p>Describe the issue in detail</p>
                             <textarea
-                                rows="17"
+                                rows="10"
                                 className="paramtextarea"
                                 value={desc}
                                 onChange={(e)=>setDesc(e.target.value)}
