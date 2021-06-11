@@ -12,11 +12,8 @@
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
-  background-image: linear-gradient(
-    to top left,
-    rgb(136, 72, 173),
-    rgb(116, 109, 199)
-  );
+  background: rgb(154,89,244);
+background: linear-gradient(90deg, rgba(154,89,244,1) 0%, rgba(22,228,154,1) 0%, rgba(131,186,237,1) 100%);
 }
 
 .firepad {
