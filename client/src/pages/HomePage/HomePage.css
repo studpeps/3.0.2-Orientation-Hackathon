@@ -2,7 +2,13 @@
   margin-top: 20px;
   padding: 15px 20px;
   width: 20%;
-  background-color: black;
+  background: rgb(154, 89, 244);
+  background: linear-gradient(
+    90deg,
+    rgba(154, 89, 244, 1) 0%,
+    rgba(22, 228, 154, 1) 0%,
+    rgba(131, 186, 237, 1) 100%
+  );
   color: white;
 }
 .topBar {

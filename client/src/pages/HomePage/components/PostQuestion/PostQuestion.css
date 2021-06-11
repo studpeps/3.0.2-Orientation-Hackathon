@@ -19,8 +19,10 @@
   justify-content: space-between;
 }
 .refreshIcon {
-  margin-left: 10px;
+  margin-left: 35%;
   border: none;
+  cursor: pointer;
+  border-radius: 5px;
 }
 .refreshIcon:hover {
   cursor: pointer;
@@ -52,7 +54,12 @@
   border: none;
   background-color: #83baed;
   color: white;
+  cursor: pointer;
 }
+.searchBtnbutton:hover {
+  background-color: #85c1f8;
+}
+
 .param {
   position: relative;
   margin-bottom: 5px;
@@ -76,6 +83,10 @@
   color: white;
   border: none;
   font-size: 18px;
+  cursor: pointer;
+}
+.openPost:hover {
+  background-color: #83baed;
 }
 .paramInput {
   border-radius: 3px;

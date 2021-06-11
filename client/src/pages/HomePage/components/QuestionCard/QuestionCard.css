@@ -6,6 +6,7 @@
 }
 .quser {
   margin: 0;
+  color: grey;
 }
 .question {
   margin: 0;
@@ -18,4 +19,8 @@
   border-radius: 5px;
   padding: 15px 20px;
   height: fit-content;
+  cursor: pointer;
+}
+.join:hover {
+  background-color: aquamarine;
 }

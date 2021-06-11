@@ -13,7 +13,7 @@ function PostQuestion() {
 
     return (
         <>
-      <button className="openPost" onClick={()=>setSearchOpen(open=>!open)} >POST A QUESTION</button>
+      <button className="openPost" onClick={()=>setSearchOpen(open=>!open)} >GOT A QUESTION?</button>
       <div
         className={searchOpen ? 'parameterSearch open' : 'parameterSearch'}
         id="parameterSearchId"
