@@ -21,7 +21,7 @@ const Editor = () => {
     };
 
     try {
-      const resp = await axios.post("https://awancors.herokuapp.com/api.jdoodle.com/v1/execute", code);
+      const resp = await axios.post("https://awancors.herokuapp.com/https://api.jdoodle.com/v1/execute", code);
       console.log(resp.data.output);
       setData(resp.data.output);
     } catch (err) {
