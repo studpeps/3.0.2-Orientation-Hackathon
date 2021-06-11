@@ -1,12 +1,126 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
+import { CopyToClipboard } from "react-copy-to-clipboard";
+import Peer from "simple-peer";
+import io from "socket.io-client";
+import { uuid } from "uuidv4";
+
 import "../../css/Editor.css";
 import firebase from "firebase";
 import Result from "./result";
 
+// const socket = io.connect("http://localhost:8000");
+
 const Editor = () => {
   const [data, setData] = useState("");
   const [padRef, setPadRef] = useState("");
+  const [self, setSelf] = useState("");
+  const [users, setUsers] = useState({});
+  const [stream, setStream] = useState();
+  const [receivingCall, setReceivingCall] = useState(false);
+  const [caller, setCaller] = useState("");
+  const [callerSignal, setCallerSignal] = useState();
+  const [callAccepted, setCallAccepted] = useState(false);
+  const [activeCallBtn, setActiveCallBtn] = useState(true);
+  const [activeAnswerBtn, setActiveAnswerBtn] = useState(false);
+  const [btnDisabled, setBtnDisabled] = useState(false);
+
+  const userVideo = useRef();
+  const partnerVideo = useRef();
+  const socket = useRef();
+
+  useEffect(() => {
+    socket.current = io.connect("localhost:8000");
+    navigator.mediaDevices
+      .getUserMedia({ video: true, audio: true })
+      .then((stream) => {
+        setStream(stream);
+        if (userVideo.current) {
+          userVideo.current.srcObject = stream;
+        }
+      });
+
+    socket.current.on("yourID", (id) => {
+      setSelf(id);
+    });
+
+    socket.current.on("allUsers", (users) => {
+      setUsers(users);
+    });
+
+    socket.current.on("hey", (data) => {
+      setReceivingCall(true);
+      setCaller(data.from);
+      setCallerSignal(data.signal);
+    });
+  }, []);
+
+  const callPeer = (id) => {
+    const peer = new Peer({
+      initiator: true,
+      trickle: false,
+      stream: stream,
+    });
+    peer.on("signal", (data) => {
+      socket.current.emit("callUser", {
+        userToCall: id,
+        signalData: data,
+        from: self,
+      });
+    });
+
+    peer.on("stream", (stream) => {
+      if (partnerVideo.current) {
+        partnerVideo.current.srcObject = stream;
+      }
+    });
+
+    socket.current.on("callAccepted", (signal) => {
+      setCallAccepted(true);
+      peer.signal(signal);
+    });
+
+    setActiveCallBtn(false);
+    setBtnDisabled(true);
+  };
+
+  const acceptCall = () => {
+    setCallAccepted(true);
+    const peer = new Peer({
+      initiator: false,
+      trickle: false,
+      stream: stream,
+    });
+    peer.on("signal", (data) => {
+      socket.current.emit("acceptCall", { signal: data, to: caller });
+    });
+
+    peer.on("stream", (stream) => {
+      partnerVideo.current.srcObject = stream;
+    });
+
+    peer.signal(callerSignal);
+    setActiveAnswerBtn(true);
+  };
+
+  let UserVideo;
+  if (stream) {
+    UserVideo = <video playsInline muted ref={userVideo} autoPlay />;
+  }
+
+  let PartnerVideo;
+  if (callAccepted) {
+    PartnerVideo = <video playsInline ref={partnerVideo} autoPlay />;
+  }
+
+  let incomingCall;
+  if (receivingCall) {
+    incomingCall = (
+      <button className="answer-call-btn" onClick={acceptCall}>
+        Accept
+      </button>
+    );
+  }
 
   //event handlers
   const compileHandler = async (e) => {
@@ -21,7 +135,10 @@ const Editor = () => {
     };
 
     try {
-      const resp = await axios.post("https://awancors.herokuapp.com/https://api.jdoodle.com/v1/execute", code);
+      const resp = await axios.post(
+        "https://awancors.herokuapp.com/https://api.jdoodle.com/v1/execute",
+        code
+      );
       console.log(resp.data.output);
       setData(resp.data.output);
     } catch (err) {
@@ -58,16 +175,23 @@ const Editor = () => {
     var firepadRef = getExampleRef();
     var codeMirror = window.CodeMirror(
       document.getElementById("firepad-container"),
-      { lineWrapping: true, mode: "javascript" }
+      {
+        lineWrapping: true,
+        mode: "javascript",
+        lineNumbers: true,
+        theme: "base16-dark",
+      }
     );
     var firepad = window.Firepad.fromCodeMirror(firepadRef, codeMirror, {
       defaultText:
         '// JavaScript Editing with Firepad!\nfunction go() {\n  var message = "Hello, world.";\n  console.log(message);\n}',
+      userColor: "#fff",
     });
+
     setPadRef(firepad);
 
     firepad.on("ready", function () {
-      console.log(firepad.getText());
+      firepad.setUserColor("#874AAE");
     });
   }, []);
 
@@ -76,18 +200,37 @@ const Editor = () => {
       <div className="top-section">
         <div id="firepad-container"></div>
         <div className="video-chat">
-          <div className="vid"></div>
-          <div className="vid"></div>
+          <div className="vid">{UserVideo}</div>
+          <div className="vid">{PartnerVideo}</div>
         </div>
       </div>
       <div className="middle-section">
         <button className="compile-btn" onClick={compileHandler}>
           compile
         </button>
-        <button className="end-call-btn">End Session</button>
+        <button className="end-call-btn" onClick={() => window.location = "/"}>End Session</button>
+        {!btnDisabled && Object.keys(users).map((key) => {
+            if (key == self) {
+              return null;
+            }
+            return (
+              activeCallBtn && (
+                <button className ="call-btn"
+                  onClick={() => {
+                    callPeer(key);
+                  }}
+                >
+                  Call
+                </button>
+              )
+            );
+          })}
+        
+        {!activeAnswerBtn && incomingCall}
       </div>
       <div className="bottom-section">
         <Result data={data} />
+        
       </div>
     </div>
   );
