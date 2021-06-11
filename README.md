@@ -66,14 +66,7 @@ cd client
 npm install
 ```
 
-### 3. Build Front-end
-
-This will build the React.JS frontend.
-
-```bash
-npm run build
-```
-### 4.Start front-end
+### 3.Start front-end
 
 ```bash
 npm start
@@ -90,14 +83,7 @@ cd server
 npm install
 ```
 
-### 3. Build Back-end
-
-This will build the Node.JS backend.
-
-```bash
-npm run build
-```
-### 4.Start Server
+### 3.Start Server
 
 ```bash
 nodemon index.js
