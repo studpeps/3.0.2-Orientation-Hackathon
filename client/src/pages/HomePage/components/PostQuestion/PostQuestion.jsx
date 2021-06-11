@@ -1,7 +1,11 @@
 import React, { useState } from 'react'
+import { useHistory } from "react-router-dom"
+import axios from 'axios'
 import "./PostQuestion.css"
 
 function PostQuestion() {
+
+    let history = useHistory()
     const [searchOpen,setSearchOpen]=useState(false)
     const [question,setQuestion]=useState("")
     const [desc,setDesc]=useState("")
@@ -10,6 +14,39 @@ function PostQuestion() {
         setQuestion("")
         setDesc("")
     }
+
+    async function addqns(e){
+        e.preventDefault()
+
+        const result = await axios.post(
+            'http://localhost:3001/api/question', 
+        {
+            "title": question,
+            "description": desc
+        },
+        {
+                'Content-Type': 'application/json'
+            }
+            
+        ).then((res) => {
+            console.log(res.status)
+
+            if (res.data.status === "ok") {
+                console.log(res.data.data.hash)
+                alert('Success')
+                history.push(`/${res.data.data.hash}`)
+               
+            } else {
+                alert(res.data.message)
+            }
+        })
+    }
+    // function handle(e) {
+    //     const newdata = {...data}
+    //     newdata[e.target.id] = e.target.value
+    //     setData(newdata)
+    //     console.log(newdata)
+    // }
 
     return (
         <>
@@ -38,7 +75,7 @@ function PostQuestion() {
                         <div className="param">
                             <p>Describe the issue in detail</p>
                             <textarea
-                                rows="17"
+                                rows="10"
                                 className="paramtextarea"
                                 value={desc}
                                 onChange={(e)=>setDesc(e.target.value)}
@@ -47,7 +84,7 @@ function PostQuestion() {
                         
                         
                     <div className="searchBtn">
-                        <button className="searchBtnbutton">POST</button>
+                        <button className="searchBtnbutton" onClick = {addqns}>POST</button>
                     </div>
                 </div>
             </div>

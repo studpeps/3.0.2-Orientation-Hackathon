@@ -1,64 +1,62 @@
-import React from 'react'
+
+import axios from 'axios'
+import React, {useState} from 'react'
+import { useHistory } from "react-router-dom"
 import "./Register.css"
 
 function Register() {
+    let history = useHistory();
 
+    const [data, setData] = useState({
+        email: "",
+        username: "",
+        password:""
+    })
     
-    // Logged()
-    // async function Logged(event) {
-    //     const result = await fetch('/api/checkauth', {
-    //         method: 'GET',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //         }
-    //     }).then((res) => res.json())
+    async function signup(e){
+        e.preventDefault()
 
-    //     if (result.status === 'ok') {
-    //         location.assign('./page.html');
-    //     } 
-    //     // else {
-    //     //     alert(result.message)
-    //     // }
-    // }
-
-    async function registerUser(event) {
-        event.preventDefault()
-        const email = document.getElementById('email').value
-        const username = document.getElementById('username').value
-        const password = document.getElementById('password').value
-
-        const result = await fetch('/api/register', {
-            method: 'POST',
-            headers: {
+        const result = await axios.post(
+            'http://localhost:3001/api/register', 
+        {
+            "email": data.email,
+            "username": data.username,
+            "password": data.password
+        },
+        {
                 'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                email,
-                username,
-                password
-            })
-        }).then((res) => res.json())
+            }
+            
+        ).then((res) => {
+            console.log(res.status)
 
-        if (result.status === 'ok') {
-            alert('Success')
-            Redirect()
-        } else {
-            alert(result.message)
-            console.log(result.message)
-        }
+            if (res.data.status === "ok") {
+                alert('Success')
+                Redirect();
+            } else {
+                alert(res.data.message)
+            }
+        })
+    }
+    function handle(e) {
+        const newdata = {...data}
+        newdata[e.target.id] = e.target.value
+        setData(newdata)
+        console.log(newdata)
     }
     function Redirect() {
-        window.location = "/home";
+       history.push('/') 
     }
+    
 
     return (
         <div className="register">
-            <form className="registerForm" id="signup-form">
+            <form className="registerForm" id="signup-form" onSubmit = {(e) => signup(e)}>
             <h1>Sign Up</h1>
-                <input type="email" id="email" placeholder="Email" /> <br/><br/>
-                <input type="username" id="username" placeholder="Username" /> <br/><br/>
-                <input type="password" id="password" placeholder="Password" /> <br/><br/>
-                <button className="submitBtn" type="submit" onSubmit={registerUser}>Register</button>
+                <input onChange = {(e) => handle(e)}  type="email" id="email" placeholder="Email" value = {data.email} /> <br/><br/>
+                <input onChange = {(e) => handle(e)} type="username" id="username" placeholder="Username" value = {data.username}/> <br/><br/>
+                <input onChange = {(e) => handle(e)} type="password" id="password" placeholder="Password" value = {data.password}/> <br/><br/>
+                <button className="submitBtn" type="submit">Register</button>
             </form>
         </div>
     )
