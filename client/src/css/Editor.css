@@ -3,27 +3,32 @@
   height: 50vh;
   margin-top: 5vh;
   margin-left: 2vw;
-  border: 1px solid #000;
 }
 
 .body {
   width: 100%;
+  height: 100vh;
   overflow-y: hidden;
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
-  background-image: linear-gradient(to bottom right, rgb(151, 36, 167), rgb(66, 58, 175));
+  background-image: linear-gradient(
+    to bottom right,
+    rgb(120, 54, 129),
+    rgb(116, 109, 199)
+  );
 }
 
 .firepad {
-  width: 50vw;
+  width: 65vw;
   height: 50vh;
+  border-radius: 3px;
 }
 
 .CodeMirror {
-  background-color: #1D2333;
+  background-color: #1d2333;
   color: #fff;
-  
+  border-radius: 3px;
 }
 .top-section {
   display: flex;
@@ -33,10 +38,13 @@
 
 .video-chat {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   margin-top: 5vh;
   margin-left: 2vw;
+  margin-right: 5vw;
   width: 100%;
+  justify-content: center;
+  align-items: flex-end;
 }
 
 .vid {
@@ -44,20 +52,22 @@
   width: 400px;
   background-color: rgb(0, 0, 0);
   margin: 3px;
+  border-radius: 3px;
 }
 
 .vid video {
   width: 400px;
+  border-radius: 3px;
 }
 
 .middle-section {
   height: 5vh;
-
-  margin: 1vh 2vw;
-  margin-right: 100px;
-  /* background-color: rgb(44, 37, 153); */
   display: flex;
   align-items: center;
+  width: 50vw;
+  margin-left: 35px;
+
+  margin-bottom: 10px;
 }
 
 .compile-btn {
@@ -68,6 +78,12 @@
   margin-left: 20px;
   margin-right: 20px;
   color: #fff;
+  border-radius: 2px;
+  transition: all 0.4s ease;
+}
+.compile-btn:hover {
+  background-color: #293c91;
+  transition: all 0.4s ease;
 }
 
 .end-call-btn {
@@ -78,15 +94,23 @@
   margin-left: 20px;
   margin-right: 20px;
   color: #fff;
+  border-radius: 2px;
+  transition: all 0.4s ease;
+}
+.end-call-btn:hover {
+  transition: all 0.4s ease;
+  background-color: rgb(167, 35, 35);
 }
 
 .bottom-section {
-  margin: 10px;
-  height: 300px;
-  width: 100%;
+  margin-left: 35px;
+  height: 35vh;
+  width: 65vw;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #0d101e;
+  border-radius: 3px;
 }
 
 .result {
@@ -94,5 +118,4 @@
   width: 100%;
   margin: 20px;
   /* background-color: blueviolet; */
-  border: 1px solid #000;
 }
