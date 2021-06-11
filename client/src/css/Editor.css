@@ -13,15 +13,15 @@
   display: flex;
   flex-direction: column;
   background-image: linear-gradient(
-    to bottom right,
-    rgb(120, 54, 129),
+    to top left,
+    rgb(136, 72, 173),
     rgb(116, 109, 199)
   );
 }
 
 .firepad {
   width: 65vw;
-  height: 50vh;
+  height: 54vh;
   border-radius: 3px;
 }
 
@@ -29,12 +29,23 @@
   background-color: #1d2333;
   color: #fff;
   border-radius: 3px;
+  padding: 10px;
 }
+
+.CodeMirror-cursor {
+  border-color: rgb(255, 255, 255);
+}
+
 .top-section {
   display: flex;
   flex-direction: row;
   justify-content: left;
 }
+
+/*display: flex;
+    flex-direction: row;
+    justify-content: left;
+    height: 56vh;*/
 
 .video-chat {
   display: flex;
@@ -103,19 +114,23 @@
 }
 
 .bottom-section {
-  margin-left: 35px;
-  height: 35vh;
-  width: 65vw;
+  margin-left: 26px;
+  height: 30vh;
+  width: 96vw;
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
-  background-color: #0d101e;
   border-radius: 3px;
+  padding: 10px;
+  background-color: #fff;
 }
 
 .result {
+  padding: 10px;
+  color: #fff;
   height: 100%;
-  width: 100%;
-  margin: 20px;
-  /* background-color: blueviolet; */
+  width: 65vw;
+  background-color: #0d101e;
 }
+
+
