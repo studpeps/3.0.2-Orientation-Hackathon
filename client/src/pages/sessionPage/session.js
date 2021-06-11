@@ -21,6 +21,9 @@ const Editor = () => {
   const [caller, setCaller] = useState("");
   const [callerSignal, setCallerSignal] = useState();
   const [callAccepted, setCallAccepted] = useState(false);
+  const [activeCallBtn, setActiveCallBtn] = useState(true);
+  const [activeAnswerBtn, setActiveAnswerBtn] = useState(false);
+  const [btnDisabled, setBtnDisabled] = useState(false);
 
   const userVideo = useRef();
   const partnerVideo = useRef();
@@ -76,6 +79,9 @@ const Editor = () => {
       setCallAccepted(true);
       peer.signal(signal);
     });
+
+    setActiveCallBtn(false);
+    setBtnDisabled(true);
   };
 
   const acceptCall = () => {
@@ -86,14 +92,15 @@ const Editor = () => {
       stream: stream,
     });
     peer.on("signal", (data) => {
-      socket.current.emit("acceptCall", {signal: data, to: caller});
+      socket.current.emit("acceptCall", { signal: data, to: caller });
     });
 
-    peer.on("stream", stream => {
+    peer.on("stream", (stream) => {
       partnerVideo.current.srcObject = stream;
     });
 
     peer.signal(callerSignal);
+    setActiveAnswerBtn(true);
   };
 
   let UserVideo;
@@ -109,10 +116,9 @@ const Editor = () => {
   let incomingCall;
   if (receivingCall) {
     incomingCall = (
-      <div>
-        <h1>{caller} is calling you</h1>
-        <button onClick={acceptCall}>Accept</button>
-      </div>
+      <button className="answer-call-btn" onClick={acceptCall}>
+        Accept
+      </button>
     );
   }
 
@@ -169,7 +175,12 @@ const Editor = () => {
     var firepadRef = getExampleRef();
     var codeMirror = window.CodeMirror(
       document.getElementById("firepad-container"),
-      { lineWrapping: true, mode: "javascript" }
+      {
+        lineWrapping: true,
+        mode: "javascript",
+        lineNumbers: true,
+        theme: "base16-dark",
+      }
     );
     var firepad = window.Firepad.fromCodeMirror(firepadRef, codeMirror, {
       defaultText:
@@ -197,27 +208,29 @@ const Editor = () => {
         <button className="compile-btn" onClick={compileHandler}>
           compile
         </button>
-        <button className="end-call-btn">End Session</button>
-      </div>
-      <div className="bottom-section">
-        <Result data={data} />
-        <div className="call-form">
-          {Object.keys(users).map((key) => {
+        <button className="end-call-btn" onClick={() => window.location = "/"}>End Session</button>
+        {!btnDisabled && Object.keys(users).map((key) => {
             if (key == self) {
               return null;
             }
             return (
-              <button
-                onClick={() => {
-                  callPeer(key);
-                }}
-              >
-                Call
-              </button>
+              activeCallBtn && (
+                <button className ="call-btn"
+                  onClick={() => {
+                    callPeer(key);
+                  }}
+                >
+                  Call
+                </button>
+              )
             );
           })}
-          {incomingCall}
-        </div>
+        
+        {!activeAnswerBtn && incomingCall}
+      </div>
+      <div className="bottom-section">
+        <Result data={data} />
+        
       </div>
     </div>
   );
