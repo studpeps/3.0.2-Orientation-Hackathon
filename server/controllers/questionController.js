@@ -19,7 +19,7 @@ exports.addQuestion = async (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', '*')
     const { title, description } = req.body;
     if (!title || !description ) throw 'All fields not provided.'
-    const user = "60c3bb8f7a3d1b29acf82844"
+    const user = "60c3d9fe9bd0f7004410b0fd"
 
     let uuidvv = uuidv4()
     let hash = `session#-1${uuidvv}`
