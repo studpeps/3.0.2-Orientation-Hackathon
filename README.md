@@ -52,7 +52,7 @@ git clone https://github.com/studpeps/3.0.2-Orientation-Hackathon.git
 
 Navigate to project directory
 
-## Open two terminals:
+## Open three terminals:
 
 ### Terminal 1 :
 
@@ -88,4 +88,23 @@ npm install
 ```bash
 nodemon index.js
 ```
+
+### Terminal 3 (for the video-chat feature) :
+
+```bash
+cd server
+```
+
+### 2. Install Dependencies
+
+```bash
+npm install
+```
+
+### 3.Start WebRTC
+
+```bash
+npm run devrtc
+```
+
 A browser window will automatically open up with a live-reloading preview of the code.
