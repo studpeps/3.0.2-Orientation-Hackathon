@@ -6,9 +6,11 @@ require('dotenv').config();
 const errorHandlers = require("./handlers/errorHandler");
 const apiRouter = require('./routes/api');
 const indexRouter = require('./routes/index');
+const cors = require("cors")
 
 const app = express();
 
+app.use(cors())
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));

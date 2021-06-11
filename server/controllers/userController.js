@@ -2,7 +2,9 @@ const jwt = require('jsonwebtoken')
 const User = require('../models/userModel')
 
 exports.register = async (req, res) => {
-    const { email, username, password } = req.body;
+    res.setHeader('Access-Control-Allow-Origin', '*')
+    console.log(req.body)
+    const { email, username, password } = req.body; 
     if (!email || !username || !password) throw 'All fields not provided.'
 
     const userExists = await User.findOne({ email });
@@ -22,6 +24,7 @@ exports.register = async (req, res) => {
 }
 
 exports.login = async (req, res) => {
+    res.setHeader('Access-Control-Allow-Origin', '*')
     const { email, password } = req.body;
     if (!email || !password) throw 'All fields not provided.'
 
@@ -46,6 +49,7 @@ exports.login = async (req, res) => {
 }
 
 exports.logout = async (req, res) => {
+    res.setHeader('Access-Control-Allow-Origin', '*')
     res.cookie('jwt', '', { maxAge: 1 });
     res.redirect('/');
 }

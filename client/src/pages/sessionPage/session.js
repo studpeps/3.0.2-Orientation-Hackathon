@@ -171,7 +171,12 @@ const Editor = () => {
       appId: "1:3997630289:web:d364d51b5bf3e52fca1d70",
       measurementId: "G-DJ43QC0W8H",
     };
-    firebase.initializeApp(config);
+    if (!firebase.apps.length) {
+      firebase.initializeApp(config);
+   }else {
+      firebase.app(); // if already initialized, use that one
+   }
+    // firebase.initializeApp(config);
     var firepadRef = getExampleRef();
     var codeMirror = window.CodeMirror(
       document.getElementById("firepad-container"),
@@ -206,7 +211,7 @@ const Editor = () => {
       </div>
       <div className="middle-section">
         <button className="compile-btn" onClick={compileHandler}>
-          compile
+          Compile
         </button>
         <button className="end-call-btn" onClick={() => window.location = "/"}>End Session</button>
         {!btnDisabled && Object.keys(users).map((key) => {

@@ -9,6 +9,10 @@ const questionSchema = new mongoose.Schema({
         type: String,
         required: "Description is required.",
     },
+    hash: {
+        type: String,
+        required: "Hash is required.",
+    },
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
